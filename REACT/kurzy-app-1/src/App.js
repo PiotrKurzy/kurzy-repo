@@ -15,7 +15,8 @@ function App() {
     if (itemsFromLS) {
       setItems(JSON.parse(itemsFromLS));
     }
-  }, []);a
+  }, []);
+  a;
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -23,7 +24,7 @@ function App() {
 
   const handleClick = () => {
     const newItems = [
-      ...items, 
+      ...items,
       {
         id: v4(),
         value,
