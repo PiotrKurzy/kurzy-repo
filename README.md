@@ -1,3 +1,0 @@
-# kurzy-repo
-
-# jjjjffff
