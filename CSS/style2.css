@@ -1,0 +1,31 @@
+body {
+  background-color: wheat;
+}
+.container {
+  color: red;
+  background-color: green;
+  margin: 33px;
+  width: 200px;
+  height: 200px;
+}
+.box {
+  color: rgb(16, 23, 156);
+  font-family: Gilroy-Regular, Times, serif;
+  text-decoration: underline;
+  text-align: center;
+  font-size: 30px;
+  background-color: rgb(87, 120, 109);
+  padding-top: 30px;
+  width: 400px;
+  height: 400px;
+  border: 4px dashed #000;
+  margin: 10px 100px 10px 100px;
+  display: block;
+}
+.dupa {
+  color: purple;
+  background-color: rgb(185, 86, 15);
+  margin: 60px;
+  width: 500px;
+  height: 500px;
+}

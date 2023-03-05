@@ -1,0 +1,35 @@
+body {
+  background-color: white;
+}
+
+div {
+  vertical-align: top;
+}
+
+.cont1 .cont3 {
+  column-count: 2;
+}
+img.cont {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 72px;
+  width: 249px;
+  height: 36px;
+}
+.cont1 {
+  display: inline-block;
+  background-color: red;
+  width: 500px;
+  height: 790px;
+  box-sizing: border-box;
+  padding: 48px 0px 64px 80px;
+  margin-top: 64px;
+}
+.cont3 {
+  display: inline-block;
+  background-color: green;
+  width: 500px;
+  height: 790px;
+  margin-top: 64px;
+}

@@ -1,0 +1,15 @@
+h1 {
+  color: blue;
+  border-bottom: 5px solid red;
+}
+ul {
+  background-color: yellow;
+}
+li {
+  padding: 10px;
+  font-size: 22px;
+}
+body {
+  width: 400px;
+  margin: auto;
+}
