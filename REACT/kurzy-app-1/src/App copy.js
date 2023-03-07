@@ -1,19 +1,22 @@
 import "./App.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CheckIcon from "@mui/icons-material/Check";
-
-// import { useState, useEffect } from "react";
-// import BasicRating from "./components/BasicRating";
+import BasicRating from "./components/BasicRating";
 
 function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
-
+  useEffect(() => {
+    const itemsFromLS = localStorage.getItem("items");
+    if (itemsFromLS) {
+      setItems(JSON.parse(itemsFromLS));
+    }
+  }, []);
+  a;
   const handleChange = (event) => {
-    // console.log(`event`, event.target.value);
     setValue(event.target.value);
   };
   const handleClick = () => {
@@ -33,22 +36,21 @@ function App() {
       handleClick();
     }
   };
-
+  const saveToLocalStorage = () => {
+    localStorage.setItem("items", JSON.stringify(items));
+  };
   const markAsCompleted = (id) => {
-    const currentItem = items.find((item) => item.id === id);
-    const newItem = {
-      ...currentItem,
-      isCompleted: !currentItem.isCompleted,
-    };
     const index = items.findIndex((item) => item.id === id);
-    const newItems = [...items].splice(index, 0, newItem);
+    const newItem = {
+      ...items[index],
+      isCompleted: !items[index].isCompleted,
+    };
+    const newItems = [...items];
+    newItems.splice(index, 1, newItem);
     setItems(newItems);
-    console.log(`currentItem`, currentItem);
   };
   const removeItem = () => {};
-
-  console.log(`items`, items);
-
+  console.log(items);
   return (
     <div>
       <div>
@@ -64,7 +66,9 @@ function App() {
           {items.map((item) => (
             <li key={item.id}>
               <div>
-                <span>{item.value}</span>
+                <span className={item.isCompleted ? "text-strike" : null}>
+                  {item.value}
+                </span>
                 <CheckIcon onClick={() => markAsCompleted(item.id)} />
                 <DeleteForeverIcon onClick={removeItem} />
               </div>
@@ -72,6 +76,8 @@ function App() {
           ))}
         </ul>
       </div>
+      <button onClick={saveToLocalStorage}>Save to LocalStorage</button>
+      <BasicRating />
     </div>
   );
 }
