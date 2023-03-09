@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CheckIcon from "@mui/icons-material/Check";
@@ -12,8 +12,14 @@ function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    const itemsfromLS = localStorage.getItem("items");
+    if (itemsfromLS) {
+      setItems(JSON.parse(itemsfromLS));
+    }
+  }, []);
+
   const handleChange = (event) => {
-    // console.log(`event`, event.target.value);
     setValue(event.target.value);
   };
   const handleClick = () => {
@@ -33,21 +39,34 @@ function App() {
       handleClick();
     }
   };
+  const saveToLocalStorage = () => {
+    localStorage.setItem(`items`, JSON.stringify(items));
+  };
 
   const markAsCompleted = (id) => {
-    const currentItem = items.find((item) => item.id === id);
-    const newItem = {
-      ...currentItem,
-      isCompleted: !currentItem.isCompleted,
-    };
     const index = items.findIndex((item) => item.id === id);
-    const newItems = [...items].splice(index, 0, newItem);
+    const newItem = {
+      ...items[index],
+      isCompleted: !items[index].isCompleted,
+    };
+    const newItems = [...items];
+    newItems.splice(index, 1, newItem);
     setItems(newItems);
-    console.log(`currentItem`, currentItem);
   };
-  const removeItem = () => {};
+
+  const removeItem = (id) => {
+    const index = items.findIndex((item) => item.id === id);
+    const newItems = [...items];
+    newItems.splice(index, 1);
+    setItems(newItems);
+  };
+
+  const date = () => {
+    console.log(`date`, date);
+  };
 
   console.log(`items`, items);
+  console.log(`date`, date);
 
   return (
     <div>
@@ -64,14 +83,18 @@ function App() {
           {items.map((item) => (
             <li key={item.id}>
               <div>
-                <span>{item.value}</span>
+                <span className={item.isCompleted ? "text-strike" : null}>
+                  {item.value}
+                </span>
                 <CheckIcon onClick={() => markAsCompleted(item.id)} />
-                <DeleteForeverIcon onClick={removeItem} />
+                <DeleteForeverIcon onClick={() => removeItem(item.id)} />
               </div>
             </li>
           ))}
         </ul>
       </div>
+      <button onClick={saveToLocalStorage}>Save to local storage</button>
+      <button onClick={date}>Time</button>
     </div>
   );
 }
