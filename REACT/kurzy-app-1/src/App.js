@@ -11,28 +11,55 @@ import CheckIcon from "@mui/icons-material/Check";
 function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const itemsfromLS = localStorage.getItem("items");
+    const countfromLS = localStorage.getItem("count");
     if (itemsfromLS) {
       setItems(JSON.parse(itemsfromLS));
+    }
+    if (countfromLS) {
+      setCount(countfromLS);
     }
   }, []);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const current = new Date();
+  const dateAndTime = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}/${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
+
+  const dateAndTimeofEdit = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}/${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
+
+  const addAmountCart = () => {
+    setCount((prevCount) => {
+      const newCount = Number(prevCount) + 1;
+      localStorage.setItem("count", newCount);
+      return newCount;
+    });
+  };
+
   const handleClick = () => {
     const newItems = [
       ...items,
       {
         id: v4(),
         value,
+        dateAndTime,
         isCompleted: false,
+        dateAndTime,
+        dateAndTimeofEdit,
       },
     ];
     setItems(newItems);
     setValue("");
+    addAmountCart();
   };
   const handleOnKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -47,6 +74,7 @@ function App() {
     const index = items.findIndex((item) => item.id === id);
     const newItem = {
       ...items[index],
+      dateAndTimeofEdit,
       isCompleted: !items[index].isCompleted,
     };
     const newItems = [...items];
@@ -61,15 +89,14 @@ function App() {
     setItems(newItems);
   };
 
-  const date = () => {
-    console.log(`date`, date);
-  };
-
   console.log(`items`, items);
-  console.log(`date`, date);
+  console.log(`count`, count);
 
   return (
     <div>
+      <div>
+        <h3>Liczba wprowadzonych zadań: {count}</h3>
+      </div>
       <div>
         <input
           onChange={handleChange}
@@ -84,7 +111,7 @@ function App() {
             <li key={item.id}>
               <div>
                 <span className={item.isCompleted ? "text-strike" : null}>
-                  {item.value}
+                  {item.value} - {item.dateAndTime} - {item.dateAndTimeofEdit}
                 </span>
                 <CheckIcon onClick={() => markAsCompleted(item.id)} />
                 <DeleteForeverIcon onClick={() => removeItem(item.id)} />
@@ -94,7 +121,6 @@ function App() {
         </ul>
       </div>
       <button onClick={saveToLocalStorage}>Save to local storage</button>
-      <button onClick={date}>Time</button>
     </div>
   );
 }
