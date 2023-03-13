@@ -8,9 +8,9 @@ npm run start
 
 1. Do istniejącego kodu dopisz logikę, która będzie usuwała element z listy TODO
 2. Dodaj do listy datę stworzenia i edycji zadania
-
 3. Dodaj licznik, który będzie zliczał wszystkie stworzone do tej pory zadania
 4. Dodaj do każdego zadania select, w którym będzie do wyboru priorytet (Low, Medium, High)
+
 5. Dodaj drugą listę, która będzie wyświetlała tylko zadania o priorytecie High, tekst całej listy będzie w kolorze czerwonym (poprzednia lista ma zawierać wszystkie zadania)
 6. W celu uproszczenia kodu, utwórz listę w oddzielnym pliku jako oddzielny komponent Reactowy i użyj go 2 razy w komponencie App
 7. Przenieś licznik do oddzielnego komponentu (oddzielny plik)

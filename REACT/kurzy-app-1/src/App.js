@@ -5,6 +5,8 @@ import { v4 } from "uuid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CheckIcon from "@mui/icons-material/Check";
 
+// import React from "react";
+// import Select from "react-select";
 // import { useState, useEffect } from "react";
 // import BasicRating from "./components/BasicRating";
 
@@ -90,12 +92,11 @@ function App() {
   };
 
   console.log(`items`, items);
-  console.log(`count`, count);
 
   return (
     <div>
       <div>
-        <h3>Liczba wprowadzonych zadań: {count}</h3>
+        <h3>Number of entered tasks: {count}</h3>
       </div>
       <div>
         <input
@@ -106,7 +107,7 @@ function App() {
         <button onClick={handleClick}>Dodaj</button>
       </div>
       <div>
-        <ul>
+        <ol>
           {items.map((item) => (
             <li key={item.id}>
               <div>
@@ -115,10 +116,16 @@ function App() {
                 </span>
                 <CheckIcon onClick={() => markAsCompleted(item.id)} />
                 <DeleteForeverIcon onClick={() => removeItem(item.id)} />
+                <select id="selectPriority">
+                  <option value="empty">---</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
               </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
       <button onClick={saveToLocalStorage}>Save to local storage</button>
     </div>
