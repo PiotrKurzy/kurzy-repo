@@ -114,7 +114,10 @@ function App() {
                 <span className={item.isCompleted ? "text-strike" : null}>
                   {item.value} - {item.dateAndTime} - {item.dateAndTimeofEdit}
                 </span>
-                <CheckIcon onClick={() => markAsCompleted(item.id)} />
+                <CheckIcon
+                  id="checkIcon"
+                  onClick={() => markAsCompleted(item.id)}
+                />
                 <DeleteForeverIcon onClick={() => removeItem(item.id)} />
                 <select id="selectPriority">
                   <option value="empty">---</option>

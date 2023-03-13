@@ -36,9 +36,19 @@
     transform: rotate(360deg);
   }
 }
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .text-strike {
   text-decoration: line-through;
 }
-/* .selectPriority {
-  margin-left: 100px;
-} */
+#selectPriority {
+  margin-left: 15px;
+}
+#checkIcon {
+  margin-left: 15px;
+  margin-right: 15px;
+}
