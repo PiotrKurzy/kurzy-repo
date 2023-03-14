@@ -13,6 +13,7 @@ import CheckIcon from "@mui/icons-material/Check";
 function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
+  const [itemsHighPriority, setItemsHighPriority] = useState([]);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ function App() {
         isCompleted: false,
         dateAndTime,
         dateAndTimeofEdit,
+        priority: "0",
       },
     ];
     setItems(newItems);
@@ -91,7 +93,32 @@ function App() {
     setItems(newItems);
   };
 
+  const optionchange = (id, value) => {
+    const index = items.findIndex((item) => item.id === id);
+    const newItem = {
+      ...items[index],
+      priority: value,
+    };
+    const newItems = [...items];
+    newItems.splice(index, 1, newItem);
+    setItems(newItems);
+
+    if (newItems[index].priority === "high") {
+      setItemsHighPriority([...itemsHighPriority, newItems[index]]);
+    } else {
+      items.map((item, index) => {
+        const newItemsHighPriority = [...itemsHighPriority];
+        // console.log(`item.priority`, item.priority);
+        if (item.priority !== "high") {
+          itemsHighPriority.splice(id, 1);
+          setItemsHighPriority(newItemsHighPriority);
+        }
+      });
+    }
+  };
+
   console.log(`items`, items);
+  console.log(`itemsHighPriority`, itemsHighPriority);
 
   return (
     <div>
@@ -119,11 +146,16 @@ function App() {
                   onClick={() => markAsCompleted(item.id)}
                 />
                 <DeleteForeverIcon onClick={() => removeItem(item.id)} />
-                <select id="selectPriority">
-                  <option value="empty">---</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
+                <select
+                  id="selectPriority"
+                  onChange={(event) =>
+                    optionchange(item.id, event.target.value)
+                  }
+                >
+                  <option value={"empty"}>---</option>
+                  <option value={"high"}>High</option>
+                  <option value={"medium"}>Medium</option>
+                  <option value={"low"}>Low</option>
                 </select>
               </div>
             </li>
