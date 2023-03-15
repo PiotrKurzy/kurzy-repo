@@ -5,15 +5,9 @@ import { v4 } from "uuid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CheckIcon from "@mui/icons-material/Check";
 
-// import React from "react";
-// import Select from "react-select";
-// import { useState, useEffect } from "react";
-// import BasicRating from "./components/BasicRating";
-
 function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
-  const [itemsHighPriority, setItemsHighPriority] = useState([]);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -40,7 +34,7 @@ function App() {
     current.getMonth() + 1
   }/${current.getFullYear()}/${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
 
-  const addAmountCart = () => {
+  const Counter = () => {
     setCount((prevCount) => {
       const newCount = Number(prevCount) + 1;
       localStorage.setItem("count", newCount);
@@ -58,12 +52,12 @@ function App() {
         isCompleted: false,
         dateAndTime,
         dateAndTimeofEdit,
-        priority: "0",
+        priority: "empty",
       },
     ];
     setItems(newItems);
     setValue("");
-    addAmountCart();
+    Counter();
   };
   const handleOnKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -102,23 +96,11 @@ function App() {
     const newItems = [...items];
     newItems.splice(index, 1, newItem);
     setItems(newItems);
-
-    if (newItems[index].priority === "high") {
-      setItemsHighPriority([...itemsHighPriority, newItems[index]]);
-    } else {
-      items.map((item, index) => {
-        const newItemsHighPriority = [...itemsHighPriority];
-        // console.log(`item.priority`, item.priority);
-        if (item.priority !== "high") {
-          itemsHighPriority.splice(id, 1);
-          setItemsHighPriority(newItemsHighPriority);
-        }
-      });
-    }
   };
 
-  console.log(`items`, items);
-  console.log(`itemsHighPriority`, itemsHighPriority);
+  const arrayHighPriority = items.filter(function (item) {
+    return item.priority === "high";
+  });
 
   return (
     <div>
@@ -163,10 +145,25 @@ function App() {
         </ol>
       </div>
       <button onClick={saveToLocalStorage}>Save to local storage</button>
+      <div>
+        <div>
+          <h3 id="highPriorityTaskListHeader">High-priority task list:</h3>
+        </div>
+        <ol>
+          {arrayHighPriority.map((item) => (
+            <li key={item.id} id="highPriorityTaskList">
+              <div>
+                <span className={item.isCompleted ? "text-strike" : null}>
+                  {item.value} - {item.dateAndTime} - {item.dateAndTimeofEdit}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
-
 export default App;
 
 // input do wprowadzania zadań

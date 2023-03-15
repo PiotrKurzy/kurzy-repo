@@ -52,3 +52,9 @@ body {
   margin-left: 15px;
   margin-right: 15px;
 }
+#highPriorityTaskList {
+  color: red;
+}
+#highPriorityTaskListHeader {
+  margin-top: 50px;
+}
