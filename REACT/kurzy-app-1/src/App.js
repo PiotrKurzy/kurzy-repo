@@ -2,22 +2,18 @@ import "./App.css";
 
 import { useState, useEffect } from "react";
 import { v4 } from "uuid";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import CheckIcon from "@mui/icons-material/Check";
+import Counter from "./components/Counter.js";
+import AllTasks from "./components/AllTasks.js";
+import AllTasksHP from "./components/AllTasksHP.js";
 
 function App() {
   const [value, setValue] = useState("");
   const [items, setItems] = useState([]);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const itemsfromLS = localStorage.getItem("items");
-    const countfromLS = localStorage.getItem("count");
     if (itemsfromLS) {
       setItems(JSON.parse(itemsfromLS));
-    }
-    if (countfromLS) {
-      setCount(countfromLS);
     }
   }, []);
 
@@ -34,14 +30,6 @@ function App() {
     current.getMonth() + 1
   }/${current.getFullYear()}/${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
 
-  const Counter = () => {
-    setCount((prevCount) => {
-      const newCount = Number(prevCount) + 1;
-      localStorage.setItem("count", newCount);
-      return newCount;
-    });
-  };
-
   const handleClick = () => {
     const newItems = [
       ...items,
@@ -57,56 +45,20 @@ function App() {
     ];
     setItems(newItems);
     setValue("");
-    Counter();
   };
+
   const handleOnKeyDown = (event) => {
     if (event.keyCode === 13) {
       handleClick();
     }
   };
   const saveToLocalStorage = () => {
-    localStorage.setItem(`items`, JSON.stringify(items));
+    localStorage.setItem("items", JSON.stringify(items));
   };
-
-  const markAsCompleted = (id) => {
-    const index = items.findIndex((item) => item.id === id);
-    const newItem = {
-      ...items[index],
-      dateAndTimeofEdit,
-      isCompleted: !items[index].isCompleted,
-    };
-    const newItems = [...items];
-    newItems.splice(index, 1, newItem);
-    setItems(newItems);
-  };
-
-  const removeItem = (id) => {
-    const index = items.findIndex((item) => item.id === id);
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
-  };
-
-  const optionchange = (id, value) => {
-    const index = items.findIndex((item) => item.id === id);
-    const newItem = {
-      ...items[index],
-      priority: value,
-    };
-    const newItems = [...items];
-    newItems.splice(index, 1, newItem);
-    setItems(newItems);
-  };
-
-  const arrayHighPriority = items.filter(function (item) {
-    return item.priority === "high";
-  });
 
   return (
     <div>
-      <div>
-        <h3>Number of entered tasks: {count}</h3>
-      </div>
+      <Counter items={items}></Counter>
       <div>
         <input
           onChange={handleChange}
@@ -117,31 +69,7 @@ function App() {
       </div>
       <div>
         <ol>
-          {items.map((item) => (
-            <li key={item.id}>
-              <div>
-                <span className={item.isCompleted ? "text-strike" : null}>
-                  {item.value} - {item.dateAndTime} - {item.dateAndTimeofEdit}
-                </span>
-                <CheckIcon
-                  id="checkIcon"
-                  onClick={() => markAsCompleted(item.id)}
-                />
-                <DeleteForeverIcon onClick={() => removeItem(item.id)} />
-                <select
-                  id="selectPriority"
-                  onChange={(event) =>
-                    optionchange(item.id, event.target.value)
-                  }
-                >
-                  <option value={"empty"}>---</option>
-                  <option value={"high"}>High</option>
-                  <option value={"medium"}>Medium</option>
-                  <option value={"low"}>Low</option>
-                </select>
-              </div>
-            </li>
-          ))}
+          <AllTasks items={items} setItems={setItems}></AllTasks>
         </ol>
       </div>
       <button onClick={saveToLocalStorage}>Save to local storage</button>
@@ -150,22 +78,10 @@ function App() {
           <h3 id="highPriorityTaskListHeader">High-priority task list:</h3>
         </div>
         <ol>
-          {arrayHighPriority.map((item) => (
-            <li key={item.id} id="highPriorityTaskList">
-              <div>
-                <span className={item.isCompleted ? "text-strike" : null}>
-                  {item.value} - {item.dateAndTime} - {item.dateAndTimeofEdit}
-                </span>
-              </div>
-            </li>
-          ))}
+          <AllTasksHP items={items} setItems={setItems}></AllTasksHP>
         </ol>
       </div>
     </div>
   );
 }
 export default App;
-
-// input do wprowadzania zadań
-// lista zadań
-// zadanie (opcje - usuń, zaznacz, że jest zrobione)

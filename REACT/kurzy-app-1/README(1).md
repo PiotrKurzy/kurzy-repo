@@ -11,11 +11,13 @@ npm run start
 3. Dodaj licznik, który będzie zliczał wszystkie stworzone do tej pory zadania
 4. Dodaj do każdego zadania select, w którym będzie do wyboru priorytet (Low, Medium, High)
 5. Dodaj drugą listę, która będzie wyświetlała tylko zadania o priorytecie High, tekst całej listy będzie w kolorze czerwonym (poprzednia lista ma zawierać wszystkie zadania)
+6. Przenieś licznik do oddzielnego komponentu (oddzielny plik)
+7. Przenieś formularz dodawania zadania (z dodatkowym selectem priorytetu) do oddzielnego komponentu
 
-6. W celu uproszczenia kodu, utwórz listę w oddzielnym pliku jako oddzielny komponent Reactowy i użyj go 2 razy w komponencie App
-7. Przenieś licznik do oddzielnego komponentu (oddzielny plik)
-8. Przenieś element listy (item) do odzielnego komponentu (oddzielny plik)
-9. Przenieś formularz dodawania zadania (z dodatkowym selectem priorytetu) do oddzielnego komponentu
+8. W celu uproszczenia kodu, utwórz listę w oddzielnym pliku jako oddzielny komponent Reactowy i użyj go 2 razy w komponencie App
+
+9. Przenieś element listy (item) do odzielnego komponentu (oddzielny plik)
+
 10. Dodaj opcję Ratingu do zadań tylko i wyłącznie zakończonych (użyj komponentu z material ui)
     *11) Użyj select z material ui do wybierania, bądź zmieniania priorytetu
     *12) Spróbuj podpiąć theming material ui
