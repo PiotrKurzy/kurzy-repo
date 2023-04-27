@@ -9,7 +9,6 @@ const SelectPriority = ({ items, setItems, item }) => {
     newItems.splice(index, 1, newItem);
     setItems(newItems);
   };
-  console.log(`items`, items);
 
   return (
     <select
