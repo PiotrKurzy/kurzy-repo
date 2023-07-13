@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ćwiczenia różne</title>
+  </head>
+  <body>
+    <div>
+      <div class="contenair1">
+        <div class="el1"></div>
+      </div>
+      <div class="contenair2">
+        <div class="el2"></div>
+        <div class="el2">
+          <div class="contenair3">
+            <div class="el4"></div>
+            <div class="el4"></div>
+            <div class="el4"></div>
+          </div>
+        </div>
+      </div>
+      <div class="contenair4">
+        <div class="el5"></div>
+        <div class="el5"></div>
+      </div>
+      <div class="contenair5">
+        <div class="el6"></div>
+        <div class="el6"></div>
+      </div>
+    </div>
+
+    <style>
+      body {
+        background: #2978a0;
+      }
+      .contenair1 {
+        height: 22vh;
+        display: flex;
+        justify-content: center;
+      }
+      .el1 {
+        width: 90%;
+        height: 58%;
+        background: #c6e0ff;
+        margin-top: 4.5%;
+      }
+      .contenair2 {
+        height: 25vh;
+        display: flex;
+        justify-content: center;
+      }
+      .contenair3 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      .el2:nth-child(1) {
+        flex-grow: 3;
+        margin-left: 5%;
+        margin-right: 2%;
+        background: #bcab79;
+      }
+      .el2:nth-child(2) {
+        flex-grow: 1;
+        margin-left: 2%;
+        margin-right: 5%;
+      }
+      .el4 {
+        width: 100%;
+        height: 100%;
+      }
+      .el4:nth-child(1) {
+        margin-bottom: 7%;
+        background: #bcab79;
+      }
+      .el4:nth-child(2) {
+        margin-bottom: 7%;
+        background: #bcab79;
+      }
+      .el4:nth-child(3) {
+        background: #bcab79;
+      }
+      .contenair4 {
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+      }
+      .el5 {
+        width: 100%;
+        height: 100%;
+        background-color: #315659;
+      }
+      .el5:nth-child(1) {
+        margin-top: 3%;
+        margin-left: 5%;
+        margin-right: 2%;
+      }
+      .el5:nth-child(2) {
+        margin-top: 3%;
+        margin-left: 2%;
+        margin-right: 5%;
+      }
+      .contenair5 {
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+      }
+      .el6 {
+        width: 100%;
+        height: 100%;
+        background-color: #315659;
+      }
+      .el6:nth-child(1) {
+        margin-top: 6%;
+        margin-left: 5%;
+        margin-right: 2%;
+      }
+      .el6:nth-child(2) {
+        margin-top: 6%;
+        margin-left: 2%;
+        margin-right: 5%;
+      }
+    </style>
+  </body>
+</html>

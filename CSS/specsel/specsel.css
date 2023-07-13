@@ -1,0 +1,36 @@
+div {
+  background-color: #f5c542;
+  width: 120px;
+  height: 100vh;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100px;
+  background-color: #07a5e3 !important;
+  border-radius: 5px;
+}
+
+li button {
+  background-color: #e0d507;
+}
+
+.home {
+  background-color: #07e03d;
+}
+
+.home.home1 {
+  background-color: #e007bc;
+}
+
+#home {
+  background-color: #07e0bf;
+}

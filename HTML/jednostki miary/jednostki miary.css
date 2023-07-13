@@ -1,0 +1,16 @@
+html {
+  font-size: 10px;
+}
+.parent {
+  background-color: yellow;
+  width: 200px;
+  height: 90vh;
+  font-size: 1rem;
+}
+
+.child {
+  background-color: aqua;
+  width: 50%;
+  height: 50vh;
+  font-size: 30em;
+}
