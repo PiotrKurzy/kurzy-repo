@@ -3,6 +3,7 @@ import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts";
+import Date from "../components/date";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -13,7 +14,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, date }) {
   return (
     <>
       <Layout home>
@@ -32,20 +33,16 @@ export default function Home({ allPostsData }) {
           <ul className={utilStyles.list}>
             {allPostsData.map(({ id, date, title }) => (
               <li className={utilStyles.listItem} key={id}>
-                {title}
+                <Link href={`/posts/${id}`}>{title}</Link>
                 <br />
-                {id}
-                <br />
-                {date}
+                <small className={utilStyles.lightText}>
+                  <Date dateString={date} />
+                </small>
               </li>
             ))}
           </ul>
         </section>
       </Layout>
-      <h1 className="title">
-        Go to <Link href="/posts/pre-rendering">pre-rendering page!</Link>
-        Go to <Link href="/posts/ssg-ssr">ssg-ssr page!</Link>
-      </h1>
     </>
   );
 }
