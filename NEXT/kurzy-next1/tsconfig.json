@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "src/pages/uuupage.tsx",
     "src/pages/index.js",
-    "src/pages/posts/first-post.js"
+    "src/pages/posts/first-posttest.js"
   ],
   "exclude": ["node_modules"]
 }
